@@ -1,4 +1,6 @@
+import com.tdd.training.Price;
+
 interface PriceCatalog
 {
-    String findPrice(String barcode);
+    Price findPrice(String barcode);
 }
