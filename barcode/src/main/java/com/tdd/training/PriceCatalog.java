@@ -1,6 +1,8 @@
+package com.tdd.training;
+
 import com.tdd.training.Price;
 
-interface PriceCatalog
+public interface PriceCatalog
 {
     Price findPrice(String barcode);
 }

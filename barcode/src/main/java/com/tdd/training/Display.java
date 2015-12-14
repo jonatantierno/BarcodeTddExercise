@@ -1,6 +1,8 @@
+package com.tdd.training;
+
 import com.tdd.training.Price;
 
-interface Display
+public interface Display
 {
     void showPrice(Price price);
 

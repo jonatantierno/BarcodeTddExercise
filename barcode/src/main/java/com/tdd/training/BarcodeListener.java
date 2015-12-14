@@ -1,3 +1,4 @@
+package com.tdd.training;
 
 public interface BarcodeListener
 {

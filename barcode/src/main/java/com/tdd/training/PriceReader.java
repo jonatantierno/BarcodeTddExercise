@@ -1,4 +1,4 @@
-import com.tdd.training.Price;
+package com.tdd.training;
 
 public class PriceReader implements BarcodeListener
 {

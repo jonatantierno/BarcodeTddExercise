@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.tdd.training.BarcodeListener;
+
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

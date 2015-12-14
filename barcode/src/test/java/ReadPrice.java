@@ -4,7 +4,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.tdd.training.Display;
 import com.tdd.training.Price;
+import com.tdd.training.PriceCatalog;
+import com.tdd.training.PriceReader;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,5 +46,4 @@ public class ReadPrice
 
         verify(display).showPriceNotFound("12345");
     }
-
 }
