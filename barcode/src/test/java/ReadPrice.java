@@ -24,4 +24,14 @@ public class ReadPrice
         verify(display).showPrice("29");
     }
 
+    @Test
+    public void priceNotFound() {
+        when(catalog.findPrice("12345")).thenReturn(null);
+        PriceReader priceReader = new PriceReader(catalog,display);
+
+        priceReader.onBarcode("12345");
+
+        verify(display).showPriceNotFound("12345");
+    }
+
 }

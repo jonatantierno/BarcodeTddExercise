@@ -13,6 +13,8 @@ public class PriceReader implements BarcodeListener
     public void onBarcode(String barcode)
     {
         String price = catalog.findPrice(barcode);
-        display.showPrice(price);
+
+        if (price == null) display.showPriceNotFound(barcode);
+        else display.showPrice(price);
     }
 }
