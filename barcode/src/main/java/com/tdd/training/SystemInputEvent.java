@@ -1,9 +1,9 @@
 package com.tdd.training;
 
-public class BarcodeEvent
+public class SystemInputEvent
 {
     private final String code;
-    public BarcodeEvent(String s)
+    public SystemInputEvent(String s)
     {
         this.code = s;
     }
@@ -16,8 +16,8 @@ public class BarcodeEvent
     @Override
     public boolean equals(Object obj)
     {
-        if (obj instanceof BarcodeEvent) {
-            return ((BarcodeEvent) obj).getValue().equals(code);
+        if (obj instanceof SystemInputEvent) {
+            return ((SystemInputEvent) obj).getValue().equals(code);
         }
         return false;
     }

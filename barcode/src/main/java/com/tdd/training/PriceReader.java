@@ -12,7 +12,7 @@ public class PriceReader implements PointOfSaleListener
     }
 
     @Override
-    public void onEvent(BarcodeEvent event)
+    public void onEvent(SystemInputEvent event)
     {
         Price price = catalog.findPrice(event.getValue());
 

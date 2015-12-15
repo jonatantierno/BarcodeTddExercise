@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.tdd.training.BarcodeEvent;
+import com.tdd.training.SystemInputEvent;
 import com.tdd.training.PointOfSaleListener;
 import com.tdd.training.SystemInputReader;
 
@@ -16,6 +16,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ReadFromSystemInput
 {
+    public static final String CONTENT = "content";
     @Mock
     PointOfSaleListener listener;
 
@@ -23,15 +24,15 @@ public class ReadFromSystemInput
     SystemInputReader reader;
 
     @Test
-    public void oneBarcode() throws IOException
+    public void oneEvent() throws IOException
     {
-        reader.process(new StringReader("barcode"));
+        reader.process(new StringReader(CONTENT));
 
-        verify(listener).onEvent(new BarcodeEvent("barcode"));
+        verify(listener).onEvent(new SystemInputEvent(CONTENT));
     }
 
     @Test
-    public void zeroBarcodes() throws IOException
+    public void zeroEvents() throws IOException
     {
         reader.process(new StringReader("\n"));
 
@@ -39,11 +40,11 @@ public class ReadFromSystemInput
     }
 
     @Test
-    public void manyBarcodes() throws IOException
+    public void manyEvents() throws IOException
     {
-        reader.process(new StringReader(("barcode\nbarcode\n\nbarcode")));
+        reader.process(new StringReader((CONTENT+"\n"+CONTENT+"\n\n"+CONTENT)));
 
-        verify(listener, times(3)).onEvent(new BarcodeEvent("barcode"));
+        verify(listener, times(3)).onEvent(new SystemInputEvent(CONTENT));
     }
 
 }

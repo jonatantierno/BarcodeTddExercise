@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.tdd.training.BarcodeEvent;
+import com.tdd.training.SystemInputEvent;
 import com.tdd.training.Display;
 import com.tdd.training.Price;
 import com.tdd.training.PriceCatalog;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class ReadPrice
 {
     public static final String BARCODE = "12345";
-    public static final BarcodeEvent BARCODE_EVENT = new BarcodeEvent(BARCODE);
+    public static final SystemInputEvent BARCODE_EVENT = new SystemInputEvent(BARCODE);
     @Mock
     Price price;
 
