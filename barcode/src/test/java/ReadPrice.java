@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.tdd.training.Display;
+import com.tdd.training.PriceNotFoundFormatter;
 import com.tdd.training.SystemInputEvent;
 import com.tdd.training.PriceConsumer;
 import com.tdd.training.Price;
@@ -19,23 +19,21 @@ public class ReadPrice
 {
     public static final String BARCODE = "12345";
     public static final SystemInputEvent BARCODE_EVENT = new SystemInputEvent(BARCODE);
-    @Mock
-    Price price;
 
     @Mock
-    Display display;
+    Price price;
     @Mock
     PriceCatalog catalog;
     @Mock
-    PriceConsumer displayPriceConsumer;
-    @Mock
     PriceConsumer priceConsumer;
+    @Mock
+    PriceNotFoundFormatter notFoundFormatter;
 
     private PriceReader priceReader;
 
     @Before
     public void setup(){
-        priceReader = new PriceReader(catalog, displayPriceConsumer, display);
+        priceReader = new PriceReader(catalog, priceConsumer, notFoundFormatter);
     }
 
     @Test
@@ -44,7 +42,7 @@ public class ReadPrice
 
         priceReader.onEvent(BARCODE_EVENT);
 
-        verify(displayPriceConsumer).consumePrice(price);
+        verify(priceConsumer).consumePrice(price);
     }
 
     @Test
@@ -53,6 +51,6 @@ public class ReadPrice
 
         priceReader.onEvent(BARCODE_EVENT);
 
-        verify(display).show("Price for "+ BARCODE + " not Found");
+        verify(notFoundFormatter).showNotFound(BARCODE);
     }
 }

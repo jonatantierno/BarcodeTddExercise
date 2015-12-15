@@ -25,13 +25,13 @@ public class Cashier
             }
         };
         ShoppingCart shoppingCart = new ShoppingCart(display);
-        MapPriceCatalog mapPriceCatalog = new MapPriceCatalog()
+
+        PriceConsumerChain displayPriceConsumer = new PriceConsumerChain(Arrays.asList(shoppingCart, new PriceFormatter(display)));
+
+        PriceReader priceReader = new PriceReader(new MapPriceCatalog()
         {{
                 addPrice("12345", Price.cents(20));
-            }};
-
-        PriceConsumerChain displayPriceConsumer = new PriceConsumerChain(Arrays.asList(shoppingCart,new PriceFormatter(display)));
-        PriceReader priceReader = new PriceReader(mapPriceCatalog, displayPriceConsumer, display);
+            }}, displayPriceConsumer, new PriceNotFoundFormatter(display));
         CommandParser commandParser = new CommandParser(priceReader, shoppingCart);
         SystemInputReader systemInputReader = new SystemInputReader(commandParser);
 
@@ -46,7 +46,7 @@ public class Cashier
         }
         catch (IOException e)
         {
-            throw new RuntimeException("Cannot read from input.",e);
+            throw new RuntimeException("Cannot read from input.", e);
         }
     }
 }

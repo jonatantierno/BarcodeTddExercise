@@ -12,6 +12,7 @@ public class FormatPrices
 {
     public static final int CENTS = 15;
     public static final Price PRICE = Price.cents(CENTS);
+    public static final String BARCODE = "Barcode";
     @Mock
     Display display;
 
@@ -21,6 +22,14 @@ public class FormatPrices
 
         formatter.consumePrice(PRICE);
 
-        verify(display).show("+ "+ PRICE.inEur());
+        verify(display).show("+ " + PRICE.inEur());
+    }
+    @Test
+    public void formatPriceNotFound() {
+        PriceNotFoundFormatter formatter = new PriceNotFoundFormatter(display);
+
+        formatter.showNotFound(BARCODE);
+
+        verify(display).show(BARCODE + " Not found");
     }
 }

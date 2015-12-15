@@ -4,13 +4,13 @@ public class PriceReader implements PointOfSaleListener
 {
     private final PriceConsumer priceConsumer;
     private final PriceCatalog catalog;
-    private final Display display;
+    private final PriceNotFoundFormatter notFoundFormatter;
 
-    public PriceReader(PriceCatalog catalog, PriceConsumer priceConsumer, Display display)
+    public PriceReader(PriceCatalog catalog, PriceConsumer priceConsumer, PriceNotFoundFormatter notFoundFormatter)
     {
         this.catalog = catalog;
         this.priceConsumer = priceConsumer;
-        this.display = display;
+        this.notFoundFormatter = notFoundFormatter;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class PriceReader implements PointOfSaleListener
 
         if (price == null)
         {
-            display.show("Price for " + event.getValue() + " not Found");
+            notFoundFormatter.showNotFound(event.getValue());
         }
         else
         {
