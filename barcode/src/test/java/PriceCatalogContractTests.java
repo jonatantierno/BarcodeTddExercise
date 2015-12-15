@@ -6,9 +6,6 @@ import com.tdd.training.Price;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by jtierno on 15/12/15.
- */
 public abstract class PriceCatalogContractTests
 {
     @Mock

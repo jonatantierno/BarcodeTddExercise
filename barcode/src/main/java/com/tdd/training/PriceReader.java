@@ -1,6 +1,6 @@
 package com.tdd.training;
 
-public class PriceReader implements BarcodeListener
+public class PriceReader implements PointOfSaleListener
 {
     private final Display display;
     private final PriceCatalog catalog;
@@ -12,11 +12,11 @@ public class PriceReader implements BarcodeListener
     }
 
     @Override
-    public void onBarcode(String barcode)
+    public void onEvent(BarcodeEvent event)
     {
-        Price price = catalog.findPrice(barcode);
+        Price price = catalog.findPrice(event.getValue());
 
-        if (price == null) display.showPriceNotFound(barcode);
+        if (price == null) display.showPriceNotFound(event.getValue());
         else display.showPrice(price);
     }
 }

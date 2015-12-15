@@ -2,3 +2,6 @@
 **/out
 barcode/target/*
 .idea
+barcode/.classpath
+barcode/.settings
+barcode/.project

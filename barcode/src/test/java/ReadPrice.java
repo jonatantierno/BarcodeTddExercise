@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.tdd.training.BarcodeEvent;
 import com.tdd.training.Display;
 import com.tdd.training.Price;
 import com.tdd.training.PriceCatalog;
@@ -15,6 +16,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ReadPrice
 {
+    public static final String BARCODE = "12345";
+    public static final BarcodeEvent BARCODE_EVENT = new BarcodeEvent(BARCODE);
     @Mock
     Price price;
 
@@ -31,19 +34,19 @@ public class ReadPrice
 
     @Test
     public void priceExists(){
-        when(catalog.findPrice("12345")).thenReturn(price);
+        when(catalog.findPrice(BARCODE)).thenReturn(price);
 
-        priceReader.onBarcode("12345");
+        priceReader.onEvent(BARCODE_EVENT);
 
         verify(display).showPrice(price);
     }
 
     @Test
     public void priceNotFound() {
-        when(catalog.findPrice("12345")).thenReturn(null);
+        when(catalog.findPrice(BARCODE)).thenReturn(null);
 
-        priceReader.onBarcode("12345");
+        priceReader.onEvent(BARCODE_EVENT);
 
-        verify(display).showPriceNotFound("12345");
+        verify(display).showPriceNotFound(BARCODE);
     }
 }

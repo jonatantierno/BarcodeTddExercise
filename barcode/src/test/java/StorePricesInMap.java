@@ -1,6 +1,4 @@
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.tdd.training.MapPriceCatalog;

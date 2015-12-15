@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.tdd.training.BarcodeListener;
+import com.tdd.training.BarcodeEvent;
+import com.tdd.training.PointOfSaleListener;
 
 import static org.mockito.Mockito.*;
 
@@ -15,14 +16,14 @@ import static org.mockito.Mockito.*;
 public class HandleBarcodeRead
 {
     @Mock
-    BarcodeListener listener;
+    PointOfSaleListener listener;
 
     @Test
     public void oneBarcode() throws IOException
     {
         process(new StringReader("barcode"));
 
-        verify(listener).onBarcode("barcode");
+        verify(listener).onEvent(new BarcodeEvent("barcode"));
     }
 
     @Test
@@ -30,7 +31,7 @@ public class HandleBarcodeRead
     {
         process(new StringReader("\n"));
 
-        verify(listener,never()).onBarcode(anyString());
+        verify(listener,never()).onEvent(any());
     }
 
     @Test
@@ -41,6 +42,6 @@ public class HandleBarcodeRead
 
     private void process(StringReader barcode) throws IOException
     {
-        new BufferedReader(barcode).lines().map(String::trim).filter((s)->!s.isEmpty()).forEach(listener::onBarcode);
+        new BufferedReader(barcode).lines().map(String::trim).filter((s)->!s.isEmpty()).forEach((line)->listener.onEvent(new BarcodeEvent(line)));
     }
 }
