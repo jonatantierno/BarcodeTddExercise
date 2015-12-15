@@ -2,12 +2,14 @@ package com.tdd.training;
 
 public class PriceReader implements PointOfSaleListener
 {
-    private final Display display;
+    private final PriceConsumer priceConsumer;
     private final PriceCatalog catalog;
+    private final Display display;
 
-    public PriceReader(PriceCatalog catalog, Display display)
+    public PriceReader(PriceCatalog catalog, PriceConsumer priceConsumer, Display display)
     {
         this.catalog = catalog;
+        this.priceConsumer = priceConsumer;
         this.display = display;
     }
 
@@ -16,7 +18,13 @@ public class PriceReader implements PointOfSaleListener
     {
         Price price = catalog.findPrice(event.getValue());
 
-        if (price == null) display.showPriceNotFound(event.getValue());
-        else display.showPrice(price);
+        if (price == null)
+        {
+            display.show("Price for " + event.getValue() + " not Found");
+        }
+        else
+        {
+            priceConsumer.consumePrice(price);
+        }
     }
 }

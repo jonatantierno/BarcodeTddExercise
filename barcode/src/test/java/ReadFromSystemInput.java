@@ -7,8 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.tdd.training.InputEventListener;
 import com.tdd.training.SystemInputEvent;
-import com.tdd.training.PointOfSaleListener;
 import com.tdd.training.SystemInputReader;
 
 import static org.mockito.Mockito.*;
@@ -18,7 +18,7 @@ public class ReadFromSystemInput
 {
     public static final String CONTENT = "content";
     @Mock
-    PointOfSaleListener listener;
+    InputEventListener listener;
 
     @InjectMocks
     SystemInputReader reader;

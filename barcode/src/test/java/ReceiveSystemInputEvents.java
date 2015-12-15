@@ -4,8 +4,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.tdd.training.InputEventListener;
 import com.tdd.training.CheckoutListener;
+import com.tdd.training.PointOfSaleListener;
 import com.tdd.training.SystemInputEvent;
 import com.tdd.training.CommandParser;
 
@@ -18,7 +18,7 @@ public class ReceiveSystemInputEvents
     public static final String CHECKOUT_COMMAND_CONTENT = "t";
 
     @Mock
-    private InputEventListener inputEventListener;
+    private PointOfSaleListener barcodeListener;
     @Mock
     private CheckoutListener checkoutListener;
 
@@ -31,7 +31,7 @@ public class ReceiveSystemInputEvents
     public void oneBarcode() {
         parser.onEvent(inputEvent);
 
-        verify(inputEventListener).onBarcode(new SystemInputEvent(CONTENT));
+        verify(barcodeListener).onEvent(new SystemInputEvent(CONTENT));
     }
 
     @Test

@@ -1,8 +1,6 @@
 package com.tdd.training;
 
-public class InputEventListener
+public interface InputEventListener
 {
-    public void onBarcode(SystemInputEvent barcode)
-    {
-    }
+    void onEvent(SystemInputEvent barcode);
 }

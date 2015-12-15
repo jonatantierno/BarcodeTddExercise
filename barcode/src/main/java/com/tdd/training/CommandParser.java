@@ -1,13 +1,13 @@
 package com.tdd.training;
 
-public class CommandParser implements PointOfSaleListener
+public class CommandParser implements InputEventListener
 {
-    private final InputEventListener barcodeListener;
+    private final PointOfSaleListener pointOfSaleListener;
     private final CheckoutListener checkoutListener;
 
-    public CommandParser(InputEventListener inputEventListener, CheckoutListener checkoutListener)
+    public CommandParser(PointOfSaleListener pointOfSaleListener, CheckoutListener checkoutListener)
     {
-        this.barcodeListener = inputEventListener;
+        this.pointOfSaleListener = pointOfSaleListener;
         this.checkoutListener = checkoutListener;
     }
 
@@ -15,6 +15,6 @@ public class CommandParser implements PointOfSaleListener
     public void onEvent(SystemInputEvent event)
     {
         if ("t".equals(event.getValue())) checkoutListener.onCheckout();
-        else barcodeListener.onBarcode(event);
+        else pointOfSaleListener.onEvent(event);
     }
 }
