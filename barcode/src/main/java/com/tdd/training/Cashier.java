@@ -17,8 +17,8 @@ public class Cashier
     public static void main(String args[])
     {
         DisplayFormatter displayFormatter = new DisplayFormatter(new SystemOutDisplay());
+        ShoppingCart shoppingCart = new ShoppingCart();
 
-        ShoppingCart shoppingCart = new ShoppingCart(displayFormatter);
         PriceConsumerChain displayPriceConsumer = new PriceConsumerChain(Arrays.asList(shoppingCart, displayFormatter));
 
         Cashier cashier = new Cashier(new SystemInputReader(
@@ -30,7 +30,7 @@ public class Cashier
                                     }},
                                 displayPriceConsumer,
                                 displayFormatter),
-                        shoppingCart)));
+                        new CheckoutCart(shoppingCart,displayFormatter))));
 
         cashier.process(System.in);
     }

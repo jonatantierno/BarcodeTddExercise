@@ -39,14 +39,4 @@ public class AddPricesToCart
 
         assertEquals(PRICE_50, cart.getTotal());
     }
-
-    @Test
-    public void checkoutPrices()
-    {
-        cart.consumePrice(PRICE_15);
-
-        cart.onCheckout();
-
-        verify(checkoutFormatter).checkout(PRICE_15);
-    }
 }
