@@ -18,7 +18,7 @@ public class FormatPrices
 
     @Test
     public void formatOnePrice(){
-        PriceFormatter formatter = new PriceFormatter(display);
+        DisplayFormatter formatter = new DisplayFormatter(display);
 
         formatter.consumePrice(PRICE);
 
@@ -26,10 +26,18 @@ public class FormatPrices
     }
     @Test
     public void formatPriceNotFound() {
-        PriceNotFoundFormatter formatter = new PriceNotFoundFormatter(display);
+        DisplayFormatter formatter = new DisplayFormatter(display);
 
         formatter.showNotFound(BARCODE);
 
         verify(display).show(BARCODE + " Not found");
+    }
+    @Test
+    public void formatCheckout() {
+        DisplayFormatter formatter = new DisplayFormatter(display);
+
+        formatter.checkout(PRICE);
+
+        verify(display).show("Total price "+PRICE.inEur());
     }
 }

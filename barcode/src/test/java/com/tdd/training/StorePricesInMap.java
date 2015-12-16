@@ -1,8 +1,7 @@
+package com.tdd.training;
+
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.tdd.training.MapPriceCatalog;
-import com.tdd.training.Price;
 
 import static org.mockito.Mockito.mock;
 

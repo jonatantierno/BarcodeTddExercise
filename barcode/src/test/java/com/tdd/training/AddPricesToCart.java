@@ -1,12 +1,10 @@
+package com.tdd.training;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.tdd.training.Display;
-import com.tdd.training.Price;
-import com.tdd.training.ShoppingCart;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -15,7 +13,7 @@ import static org.mockito.Mockito.verify;
 public class AddPricesToCart
 {
     @Mock
-    Display display;
+    private CheckoutFormatter checkoutFormatter;
 
     @InjectMocks
     ShoppingCart cart;
@@ -49,6 +47,6 @@ public class AddPricesToCart
 
         cart.onCheckout();
 
-        verify(display).show("Total price EUR 0,150000");
+        verify(checkoutFormatter).checkout(PRICE_15);
     }
 }

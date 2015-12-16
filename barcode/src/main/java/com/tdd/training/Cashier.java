@@ -16,26 +16,23 @@ public class Cashier
 
     public static void main(String args[])
     {
-        Display display = new Display()
-        {
-            @Override
-            public void show(String s)
-            {
-                System.out.println(s);
-            }
-        };
-        ShoppingCart shoppingCart = new ShoppingCart(display);
+        DisplayFormatter displayFormatter = new DisplayFormatter(new SystemOutDisplay());
 
-        PriceConsumerChain displayPriceConsumer = new PriceConsumerChain(Arrays.asList(shoppingCart, new PriceFormatter(display)));
+        ShoppingCart shoppingCart = new ShoppingCart(displayFormatter);
+        PriceConsumerChain displayPriceConsumer = new PriceConsumerChain(Arrays.asList(shoppingCart, displayFormatter));
 
-        PriceReader priceReader = new PriceReader(new MapPriceCatalog()
-        {{
-                addPrice("12345", Price.cents(20));
-            }}, displayPriceConsumer, new PriceNotFoundFormatter(display));
-        CommandParser commandParser = new CommandParser(priceReader, shoppingCart);
-        SystemInputReader systemInputReader = new SystemInputReader(commandParser);
+        Cashier cashier = new Cashier(new SystemInputReader(
+                new CommandParser(
+                        new PriceReader(
+                                new MapPriceCatalog()
+                                {{
+                                        addPrice("12345", Price.cents(20));
+                                    }},
+                                displayPriceConsumer,
+                                displayFormatter),
+                        shoppingCart)));
 
-        new Cashier(systemInputReader).process(System.in);
+        cashier.process(System.in);
     }
 
     private void process(InputStream in)

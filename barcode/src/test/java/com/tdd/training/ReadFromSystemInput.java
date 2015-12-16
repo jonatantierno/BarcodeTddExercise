@@ -1,3 +1,5 @@
+package com.tdd.training;
+
 import java.io.IOException;
 import java.io.StringReader;
 

@@ -6,11 +6,11 @@ import java.util.List;
 public class ShoppingCart implements CheckoutListener, PriceConsumer
 {
     List<Price> prices = new ArrayList<>();
-    private Display display;
+    private final CheckoutFormatter checkoutFormatter;
 
-    public ShoppingCart(Display display)
+    public ShoppingCart(CheckoutFormatter formatter)
     {
-        this.display = display;
+        checkoutFormatter = formatter;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class ShoppingCart implements CheckoutListener, PriceConsumer
     @Override
     public void onCheckout()
     {
-        display.show("Total price "+getTotal().inEur());
+        checkoutFormatter.checkout(getTotal());
     }
 }
